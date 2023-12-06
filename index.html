@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Invoice Generator</title>
+
+    <!-- For Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    
+    <!-- CSS For Print Format -->
+    <link rel="stylesheet"  href="invoiceprint.css">
+    
+    <!-- CSS For Invoice -->
+    <link rel="stylesheet"  href="invoice.css">
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.2.slim.js" integrity="sha256-OflJKW8Z8amEUuCaflBZJ4GOg4+JnNh9JdVfoV+6biw=" crossorigin="anonymous"></script>
+    
+    <!-- For Invoice  -->
+    <script src="./script.js"></script>
+
+
+</head>
+  <body>
+    
+
+    <div class="container mt-2">
+       <div class="card">
+          <!-- <div class="card-header text-center">
+            <h4>INVOICE</h4>
+            </div> -->
+            <div class="card-body">
+
+                <div class="col">
+                  <div class="date">
+                    <p>Current Date <span class="current-date"></span></p>
+                    <div class="invoice">
+                    <label >Invoice No.</label>
+                    <input name="invoiceNumber" min="1" required="" type="number" class="form-control" value="1" style="max-width: 70px;">
+                  </div>
+               </div>
+
+                  <div class="row-4">
+                    <!-- <div class="input-group mb-3">
+                        <span class="input-group-text" >Inv. No</span>
+                        <input type="text" class="form-control" placeholder="Inv. No"  >
+                    </div> -->
+
+                    <div class="input-group-d mb-3">
+                        <span class="input-group-text" >Date</span>
+                        <input type="date" class="form-control">
+                    </div>
+                   </div>
+                   <hr>
+                    <div class="row">
+                    <div class="col-6">
+                        <div class="input-group mb-3">
+                            <!-- <span class="input-group-text" >Customer</span> -->
+                            <input type="text" class="form-control" placeholder="Who is this invoice to?">
+                        </div>
+            
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="email"  >
+                        </div>
+            
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="address"  >
+                        </div>
+                    </div>
+
+                    <div class="col-6">
+                      <div class="input-group mb-3">
+                          <!-- <span class="input-group-text" >Customer</span> -->
+                          <input type="text" class="form-control" placeholder="Who is this invoice from?">
+                      </div>
+          
+                      <div class="input-group mb-3">
+                          <input type="email" class="form-control" placeholder="email"  >
+                      </div>
+          
+                      <div class="input-group mb-3">
+                          <input type="text" class="form-control" placeholder="address"  >
+                      </div>
+                  </div>
+                  </div>
+             </div>
+
+
+                <table class="table table-bordered">
+                    <thead class="table-success">
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Particular</th>
+                        <th scope="col">Description</th>
+                        <th scope="col" class="text-end">Qty</th>
+                        <th scope="col" class="text-end">Rate</th>
+                        <th scope="col" class="text-end">Price</th>
+                        <th scope="col" class="text-end">Action</th> 
+                        </th>
+                      </tr>
+                      
+                    </thead>
+
+                    <tbody id="TBody">
+                      
+                      <tr id="TRow" class="d-none">
+                        <th scope="row">1</th>
+                        <td><input type="text" class="form-control"  placeholder="Items Name"></td>
+                        <td><input type="text" class="form-control"  placeholder="description"></td>
+                        <td><input type="number" class="form-control text-end" name="qty" onchange="Calc(this);"></td>
+                        <td><input type="number" class="form-control text-end" name="rate" placeholder="$" onchange="Calc(this);"></td>
+                        <td><input type="number" class="form-control text-end" name="amt" value="0" disabled=""></td>
+                        <td class="NoPrint"><button type="button" class="btn btn-sm btn-primary" onclick="BtnDel(this)">🗑</button></td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
+
+                  <button type="button" class="btn btn-sm btn-success" onclick="BtnAdd()">Add Items</button>
+
+
+                  <div class="row">
+                    <div class="col-8">
+                      <br>
+                        <button type="button" class="btn btn-primary" onclick="printPDF()">Print</button>
+
+                    </div>
+                    <div class="col-4">
+                        <div class="input-group mb-1">
+                            <span class="input-group-text" >Total</span>
+                            <input type="number" class="form-control text-end" id="FTotal" name="FTotal" disabled="">
+                        </div>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text" >Tax</span>
+                            <input type="number" class="form-control text-end" id="FGST" name="FGST" onchange="GetTotal()">
+                        </div>
+                        <div class="input-group mb-1">
+                            <span class="input-group-text" >Net Amt</span>
+                            <input type="number" class="form-control text-end" id="FNet" name="FNet" disabled="">
+                        </div>
+
+
+                    </div>
+                </div>
+             </div>
+          </div>
+
+    </div>
+
+
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+  </body>
+</html>

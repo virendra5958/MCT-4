@@ -1,0 +1,52 @@
+/* .btn , .NoPrint 
+{
+    display: none;
+} */
+
+.form-control
+{
+    border: 0px;
+    background-color: rgb(247, 246, 245);
+}
+
+.input-group-text
+{
+    border: 0px;
+    background-color: rgb(249, 247, 247);
+}
+
+table 
+{
+    border : 1px solid black;
+}
+.input-group-text{
+    margin-top: -8px;
+}
+
+.date{
+    display: flex;
+    /* border: 2px solid red; */
+    padding-left: 10px;
+    justify-content: space-between;
+
+  
+}
+
+.invoice{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input-group-d{
+    max-width: 200px;
+    display: flex;
+    /* border: 2px solid red; */
+   
+  
+}
+input{
+    width: 50px;
+    height: 20px;
+ 
+}
+
